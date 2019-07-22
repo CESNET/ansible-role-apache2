@@ -1,0 +1,18 @@
+---
+# List of packages which will be installed
+apache_packages:
+  - apache2
+
+# List of Apache2 modules which will be enabled
+apache_modules:
+  - headers
+  - ssl
+
+# List of sites for remove
+apache_remove_sites: []
+
+# List of sites which will be copied from templates
+apache_create_sites: []
+
+# List of sites which will be enabled
+apache_enable_sites: []
