@@ -14,16 +14,6 @@
   tags:
     - configuration
 
-- name: Enable Apache modules
-  apache2_module:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ apache_modules }}"
-  notify:
-    - "restart apache"
-  tags:
-    - configuration
-
 - name: Create Apache sites
   template:
     src: "{{ item }}.j2"
@@ -65,6 +55,16 @@
   command:  a2ensite "{{ item }}"
   loop: "{{ apache_enable_sites }}"
   when: apache_enable_sites|length > 0
+  notify:
+    - "restart apache"
+  tags:
+    - configuration
+
+- name: Enable Apache modules
+  apache2_module:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ apache_modules }}"
   notify:
     - "restart apache"
   tags:
