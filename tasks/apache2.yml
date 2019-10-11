@@ -27,7 +27,7 @@
 - name: Create Apache sites
   template:
     src: "{{ item }}.j2"
-    dest: "/etc/apache2/sites-available/{{ item }}"
+    dest: "/etc/apache2/{{ item }}"
     force: yes
     mode: 0644
   loop: "{{ apache_create_sites }}"

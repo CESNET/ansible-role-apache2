@@ -12,7 +12,10 @@ apache_modules:
 apache_remove_sites: []
 
 # List of sites which will be copied from templates
-apache_create_sites: []
+# Must start with sites-available
+apache_create_sites:
+  - sites-available/000-default.conf
+  - sites-available/default-ssl.conf
 
 # List of sites which will be enabled
 apache_enable_sites: []
