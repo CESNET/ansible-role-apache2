@@ -7,6 +7,16 @@
   tags:
     - install
 
+- name: Enable Apache modules
+  file:
+    src: "/etc/apache2/mods-available/{{ item }}.load"
+    dest: "/etc/apache2/mods-enabled/{{ item }}.load"
+    state: link
+  with_items: "{{ apache_modules }}"
+  notify: restart apache
+  tags:
+    - configuration
+
 - name: Create Apache2 sites-enabled folder
   file:
     path: "/etc/apache2/sites-enabled"
@@ -52,19 +62,12 @@
     - configuration
 
 - name: Enable Apache sites
-  command:  a2ensite "{{ item }}"
+  file:
+    src: "/etc/apache2/sites-available/{{ item }}"
+    dest: "/etc/apache2/sites-enabled/{{ item }}"
+    state: link
   loop: "{{ apache_enable_sites }}"
   when: apache_enable_sites|length > 0
-  notify:
-    - "restart apache"
-  tags:
-    - configuration
-
-- name: Enable Apache modules
-  apache2_module:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ apache_modules }}"
   notify:
     - "restart apache"
   tags:
