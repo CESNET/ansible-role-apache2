@@ -5,8 +5,9 @@ apache_packages:
 
 # List of Apache2 modules which will be enabled
 apache_modules:
-  - headers
-  - ssl
+  - headers.load
+  - ssl.load
+  - ssl.conf
 
 # List of sites for remove
 apache_remove_sites: []

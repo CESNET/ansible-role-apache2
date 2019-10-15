@@ -9,8 +9,8 @@
 
 - name: Enable Apache modules
   file:
-    src: "/etc/apache2/mods-available/{{ item }}.load"
-    dest: "/etc/apache2/mods-enabled/{{ item }}.load"
+    src: "/etc/apache2/mods-available/{{ item }}"
+    dest: "/etc/apache2/mods-enabled/{{ item }}"
     state: link
   with_items: "{{ apache_modules }}"
   notify: restart apache
