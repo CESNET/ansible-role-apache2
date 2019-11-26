@@ -13,7 +13,7 @@ apache_modules:
 apache_remove_sites: []
 
 # List of sites which will be copied from templates
-# Must start with sites-available
+# Must start with sites-available (Without .jinja2)
 apache_create_sites:
   - sites-available/000-default.conf
   - sites-available/default-ssl.conf
